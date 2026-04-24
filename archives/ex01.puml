@@ -1,0 +1,18 @@
+'' Login
+
+@startuml
+
+actor Usuario
+
+boundary "Tela de Login" as Tela
+control "AuthController" as Controller
+control "AuthService" as Service
+
+Usuario -> Tela : Informa usuario
+tela -> Controller : login(usuario, senha)
+Controller -> Service : autenticar(usuario, senha)
+Service -> Controller : sucesso
+Controller -> Tela : loginSucesso()
+Tela -> Usuario : exibirTelaPrincipal()
+
+@enduml
