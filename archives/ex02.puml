@@ -1,0 +1,25 @@
+'' Login com Erro
+
+@startuml
+
+actor Usuario
+
+boundary "Tela de Login" as Tela
+control "AuthController" as Controller
+control "AuthService" as Service
+
+Usuario -> Tela : Informa usuario
+tela -> Controller : login(usuario, senha)
+Controller -> Service : autenticar(usuario, senha)
+
+alt Credenciais validas
+    Service -> Controller : sucesso
+    Controller -> Tela : loginSucesso()
+    Tela -> Usuario : exibirTelaPrincipal()
+else Credenciais invalidas
+    Service -> Controller : erroAutenticacao
+    Controller -> Tela : exibirMensagemErro()
+    Tela -> Usuario : permaneceNaTelaLogin()
+end
+
+@enduml
