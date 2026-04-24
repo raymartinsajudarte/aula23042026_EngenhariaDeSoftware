@@ -22,10 +22,14 @@
 <img width="324" height="193" alt="image" src="https://github.com/user-attachments/assets/4e4d1b4c-5b96-457e-9192-8b17f1a2cae9" />
 
 
-## 07 - Diagrama: 
+## 07 - Diagrama: Pagamento com Cartão
 
-## 08 - Diagrama: 
 
-## 09 - Diagrama: 
+## 08 - Diagrama: Recuperação de Senha
 
-## 10 - Diagrama: 
+
+## 09 - Diagrama: Pedido com Múltiplos Itens
+
+
+## 10 - Diagrama: Caso Completo
+
