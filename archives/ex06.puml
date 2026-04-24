@@ -1,0 +1,29 @@
+'' Compra com Estoque Insuficiente
+
+@startuml
+actor Cliente
+
+boundary "Tela de Compra" as Tela
+control "PedidoController" as Controller
+control "PedidoService" as Service
+entity "Estoque" as Estoque
+
+Cliente -> Tela : selecionaProduto(produto, quantidade)
+Tela -> Controller : realizarCompra(produto, quantidade)
+Controller -> Service : verificarEstoque(produto, quantidade)
+Service -> Estoque : consultarQuantidade(produto)
+Estoque --> Service : quantidadeDisponivel
+
+alt Quantidade suficiente
+    Controller -> Service : criarPedido(produto, quantidade)
+    Service -> Estoque : atualizarEstoque(produto, quantidade)
+    Service --> Controller : compraConfirmada
+    Controller -> Tela : exibirConfirmacao()
+    Tela -> Cliente : compraRealizada()
+else Quantidade insuficiente
+    Service --> Controller : estoqueInsuficiente
+    Controller -> Tela : exibirMensagemErro()
+    Tela -> Cliente : informarEstoqueInsuficiente()
+end
+
+@enduml
