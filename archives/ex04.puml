@@ -1,0 +1,28 @@
+'' Consulta de Produto
+
+@startuml
+actor Cliente
+
+boundary "Tela de Consulta de Produto" as Tela
+control "ProdutoController" as Controller
+control "ProdutoService" as Service
+database BancoDeDados
+
+Cliente -> Tela : informaCodigoProduto(codigo)
+Tela -> Controller : consultarProduto(codigo)
+Controller -> Service : buscarProduto(codigo)
+Service -> BancoDeDados : consultarProdutoPorCodigo(codigo)
+BancoDeDados -> Service : resultadoConsulta
+
+alt Produto encontrado
+    Service --> Controller : dadosProduto
+    Controller -> Tela : exibirProduto(dados)
+    Tela -> Cliente : mostrarDadosProduto()
+else Produto não encontrado
+    Service --> Controller : produtoNaoEncontrado
+    Controller -> Tela : exibirMensagemErro()
+    Tela -> Cliente : informarProdutoInexistente()
+end
+
+
+@enduml
